@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CardComponent } from '../shared/card/card.component';
 import { TUsers } from './users.module';
 
 @Component({
@@ -6,6 +7,7 @@ import { TUsers } from './users.module';
   standalone: true,
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
+  imports: [CardComponent],
 })
 export class UserComponent {
   @Input({ required: true }) user!: TUsers;

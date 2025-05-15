@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { INewTask } from '../task.module';
+import { TaskService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
@@ -10,21 +10,27 @@ import { INewTask } from '../task.module';
   styleUrl: './new-task.component.css',
 })
 export class NewTaskComponent {
-  @Output() cancel = new EventEmitter<void>();
-  @Output() addEvent = new EventEmitter<INewTask>();
+  @Input({ required: true }) userId!: string;
+  @Output() close = new EventEmitter<void>();
   enteredTitle = '';
   enteredSummary = '';
   enteredDueDate = '';
 
+  private tasksService = inject(TaskService);
+
   onCancel() {
-    this.cancel.emit();
+    this.close.emit();
   }
 
   onSubmitForm() {
-    this.addEvent.emit({
-      title: this.enteredTitle,
-      summary: this.enteredSummary,
-      dueDate: this.enteredDueDate,
-    });
+    this.tasksService.addTask(
+      {
+        title: this.enteredTitle,
+        summary: this.enteredSummary,
+        dueDate: this.enteredDueDate,
+      },
+      this.userId
+    );
+    this.close.emit();
   }
 }
