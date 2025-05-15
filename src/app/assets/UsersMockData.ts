@@ -1,8 +1,4 @@
-export type TUsers = {
-  id: string;
-  name: string;
-  avatar: string;
-};
+import { TUsers } from '../user/users.module';
 
 export const DUMMY_USERS: TUsers[] = [
   {
