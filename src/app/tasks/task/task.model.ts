@@ -1,4 +1,4 @@
-export interface ITask {
+export interface Task {
   id: string;
   userId: string;
   title: string;
@@ -6,8 +6,8 @@ export interface ITask {
   dueDate: string;
 }
 
-export interface INewTask {
+export interface NewTaskData {
   title: string;
   summary: string;
-  dueDate: string;
+  date: string;
 }
